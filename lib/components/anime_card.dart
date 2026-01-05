@@ -15,10 +15,26 @@ class AnimeCard extends StatelessWidget {
             ),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Image.asset(
-            "poster.jpg",
-            width: double.infinity,
-            fit: BoxFit.contain,
+          child: Stack(
+            alignment: AlignmentGeometry.bottomRight,
+            children: [
+              Image.asset(
+                "poster.jpg",
+                width: double.infinity,
+                fit: BoxFit.contain,
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 10, right: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.deepOrange[900],
+                ),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.favorite_outline, color: Colors.white),
+                ),
+              ),
+            ],
           ),
         ),
         Container(
