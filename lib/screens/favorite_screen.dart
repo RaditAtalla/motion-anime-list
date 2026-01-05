@@ -16,14 +16,14 @@ class FavoriteScreen extends StatelessWidget {
         ),
 
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          padding: const EdgeInsets.only(top: 50),
           child: GridView.builder(
+            padding: EdgeInsets.all(20),
             itemCount: 10,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisExtent: 380,
+              mainAxisExtent: 500,
               crossAxisCount: 2,
               crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
             ),
             itemBuilder: (context, index) {
               return AnimeCard();
