@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:motion_anime_list/components/anime_card.dart';
-import 'package:motion_anime_list/components/search_dialog.dart';
+import 'package:motion_anime_list/widgets/anime_card.dart';
+import 'package:motion_anime_list/widgets/search_dialog.dart';
 import 'package:motion_anime_list/models/anime_model.dart';
 import 'package:motion_anime_list/services/anime_services.dart';
 
