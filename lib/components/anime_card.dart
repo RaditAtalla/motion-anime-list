@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:motion_anime_list/models/anime_model.dart';
 
-class AnimeCard extends StatelessWidget {
-  final String title, image, type;
-  final int episodes, rank;
-  final double score;
+class AnimeCard extends StatefulWidget {
+  final Anime anime;
 
-  const AnimeCard({
-    super.key,
-    required this.title,
-    required this.image,
-    required this.type,
-    required this.episodes,
-    required this.rank,
-    required this.score
-  });
+  const AnimeCard({super.key, required this.anime});
+
+  @override
+  State<AnimeCard> createState() => _AnimeCardState();
+}
+
+class _AnimeCardState extends State<AnimeCard> {
+  bool isFav = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +29,7 @@ class AnimeCard extends StatelessWidget {
             alignment: AlignmentGeometry.bottomRight,
             children: [
               Image.network(
-                image,
+                widget.anime.image,
                 width: double.infinity,
                 fit: BoxFit.contain,
               ),
@@ -42,8 +40,15 @@ class AnimeCard extends StatelessWidget {
                   color: Colors.deepOrange[900],
                 ),
                 child: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite_outline, color: Colors.white),
+                  onPressed: () {
+                    setState(() {
+                      isFav = !isFav;
+                    });
+                  },
+                  icon: Icon(
+                    isFav ? Icons.favorite : Icons.favorite_outline,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -63,7 +68,7 @@ class AnimeCard extends StatelessWidget {
             crossAxisAlignment: .start,
             children: [
               Text(
-                title,
+                widget.anime.title,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
@@ -74,7 +79,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Type", style: TextStyle(fontSize: 12)),
-                        Text(type),
+                        Text(widget.anime.type),
                       ],
                     ),
                   ),
@@ -83,7 +88,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Episodes", style: TextStyle(fontSize: 12)),
-                        Text(episodes.toString()),
+                        Text(widget.anime.episodes.toString()),
                       ],
                     ),
                   ),
@@ -97,7 +102,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Score", style: TextStyle(fontSize: 12)),
-                        Text(score.toString()),
+                        Text(widget.anime.score.toString()),
                       ],
                     ),
                   ),
@@ -106,7 +111,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Rank", style: TextStyle(fontSize: 12)),
-                        Text(rank.toString()),
+                        Text(widget.anime.rank.toString()),
                       ],
                     ),
                   ),
