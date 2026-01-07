@@ -73,15 +73,8 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisSpacing: 10,
             ),
             itemBuilder: (context, index) {
-              var data = animeList[index];
-              return AnimeCard(
-                title: data.title,
-                image: data.image,
-                episodes: data.episodes,
-                rank: data.rank,
-                score: data.score,
-                type: data.type,
-              );
+              var anime = animeList[index];
+              return AnimeCard(anime: anime);
             },
           ),
         ),
