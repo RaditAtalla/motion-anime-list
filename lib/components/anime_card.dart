@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 
 class AnimeCard extends StatelessWidget {
-  const AnimeCard({super.key});
+  final String title, image, type;
+  final int episodes, rank;
+  final double score;
+
+  const AnimeCard({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.type,
+    required this.episodes,
+    required this.rank,
+    required this.score
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +30,8 @@ class AnimeCard extends StatelessWidget {
           child: Stack(
             alignment: AlignmentGeometry.bottomRight,
             children: [
-              Image.asset(
-                "poster.jpg",
+              Image.network(
+                image,
                 width: double.infinity,
                 fit: BoxFit.contain,
               ),
@@ -51,7 +63,7 @@ class AnimeCard extends StatelessWidget {
             crossAxisAlignment: .start,
             children: [
               Text(
-                "Sou Sou No Frieren",
+                title,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 10),
@@ -62,7 +74,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Type", style: TextStyle(fontSize: 12)),
-                        Text("TV"),
+                        Text(type),
                       ],
                     ),
                   ),
@@ -71,7 +83,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Episodes", style: TextStyle(fontSize: 12)),
-                        Text("28"),
+                        Text(episodes.toString()),
                       ],
                     ),
                   ),
@@ -85,7 +97,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Score", style: TextStyle(fontSize: 12)),
-                        Text("9.29"),
+                        Text(score.toString()),
                       ],
                     ),
                   ),
@@ -94,7 +106,7 @@ class AnimeCard extends StatelessWidget {
                       crossAxisAlignment: .start,
                       children: [
                         Text("Rank", style: TextStyle(fontSize: 12)),
-                        Text("1"),
+                        Text(rank.toString()),
                       ],
                     ),
                   ),
