@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:motion_anime_list/models/anime_model.dart';
 
 class AnimeCard extends StatefulWidget {
@@ -12,6 +13,26 @@ class AnimeCard extends StatefulWidget {
 
 class _AnimeCardState extends State<AnimeCard> {
   bool isFav = false;
+
+  void addToFavorite() async {
+    var favoriteBox = await Hive.openBox('fav-anime');
+    favoriteBox.put(
+      widget.anime.title,
+      Anime(
+        title: widget.anime.title,
+        image: widget.anime.image,
+        type: widget.anime.type,
+        episodes: widget.anime.episodes,
+        rank: widget.anime.rank,
+        score: widget.anime.score,
+      ),
+    );
+  }
+
+  void removeFromFavorite() async {
+    var favoriteBox = await Hive.openBox('fav-anime');
+    favoriteBox.delete(widget.anime.title);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +62,7 @@ class _AnimeCardState extends State<AnimeCard> {
                 ),
                 child: IconButton(
                   onPressed: () {
+                    isFav ? removeFromFavorite() : addToFavorite();
                     setState(() {
                       isFav = !isFav;
                     });
@@ -65,7 +87,7 @@ class _AnimeCardState extends State<AnimeCard> {
           ),
 
           child: Column(
-            crossAxisAlignment: .start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 widget.anime.title,
@@ -76,7 +98,7 @@ class _AnimeCardState extends State<AnimeCard> {
                 children: [
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Type", style: TextStyle(fontSize: 12)),
                         Text(widget.anime.type),
@@ -85,7 +107,7 @@ class _AnimeCardState extends State<AnimeCard> {
                   ),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Episodes", style: TextStyle(fontSize: 12)),
                         Text(widget.anime.episodes.toString()),
@@ -99,7 +121,7 @@ class _AnimeCardState extends State<AnimeCard> {
                 children: [
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Score", style: TextStyle(fontSize: 12)),
                         Text(widget.anime.score.toString()),
@@ -108,7 +130,7 @@ class _AnimeCardState extends State<AnimeCard> {
                   ),
                   Expanded(
                     child: Column(
-                      crossAxisAlignment: .start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text("Rank", style: TextStyle(fontSize: 12)),
                         Text(widget.anime.rank.toString()),
