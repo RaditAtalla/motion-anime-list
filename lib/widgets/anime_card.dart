@@ -12,10 +12,19 @@ class AnimeCard extends StatefulWidget {
 }
 
 class _AnimeCardState extends State<AnimeCard> {
-  bool isFav = false;
+  late bool isFav = false;
 
-  void addToFavorite() async {
-    var favoriteBox = await Hive.openBox('fav-anime');
+  void setIsFavorite() {
+    var favoriteBox = Hive.box('fav-anime');
+    if(favoriteBox.containsKey(widget.anime.title)) {
+      setState(() {
+        isFav = true;
+      });
+    }
+  }
+
+  void addToFavorite() {
+    var favoriteBox = Hive.box('fav-anime');
     favoriteBox.put(
       widget.anime.title,
       Anime(
@@ -29,9 +38,16 @@ class _AnimeCardState extends State<AnimeCard> {
     );
   }
 
-  void removeFromFavorite() async {
-    var favoriteBox = await Hive.openBox('fav-anime');
+  void removeFromFavorite() {
+    var favoriteBox = Hive.box('fav-anime');
     favoriteBox.delete(widget.anime.title);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setIsFavorite();
   }
 
   @override
