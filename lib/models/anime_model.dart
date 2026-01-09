@@ -1,6 +1,20 @@
+import 'package:hive/hive.dart';
+
+part 'anime_model.g.dart';
+
+@HiveType(typeId: 1)
 class Anime {
-  final String title, image, type;
-  final int episodes, rank;
+  @HiveField(0)
+  final String title;
+  @HiveField(1)
+  final String image; 
+  @HiveField(2)
+  final String type;
+  @HiveField(3)
+  final int episodes;
+  @HiveField(4)
+  final int rank;
+  @HiveField(5)
   final double score;
 
   Anime({
