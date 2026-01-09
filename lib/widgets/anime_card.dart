@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive/hive.dart';
+import 'package:motion_anime_list/controllers/anime_controller.dart';
 import 'package:motion_anime_list/models/anime_model.dart';
 
 class AnimeCard extends StatefulWidget {
@@ -12,11 +14,12 @@ class AnimeCard extends StatefulWidget {
 }
 
 class _AnimeCardState extends State<AnimeCard> {
+  final AnimeController animeC = Get.find<AnimeController>();
   late bool isFav = false;
 
   void setIsFavorite() {
     var favoriteBox = Hive.box('fav-anime');
-    if(favoriteBox.containsKey(widget.anime.title)) {
+    if (favoriteBox.containsKey(widget.anime.title)) {
       setState(() {
         isFav = true;
       });
@@ -36,11 +39,17 @@ class _AnimeCardState extends State<AnimeCard> {
         score: widget.anime.score,
       ),
     );
+
+    animeC.loadFavoriteAnimes();
+    animeC.loadAnimes();
   }
 
   void removeFromFavorite() {
     var favoriteBox = Hive.box('fav-anime');
     favoriteBox.delete(widget.anime.title);
+
+    animeC.loadFavoriteAnimes();
+    animeC.loadAnimes();
   }
 
   @override

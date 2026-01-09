@@ -36,17 +36,4 @@ class Anime {
       score: data['score'],
     );
   }
-
-  factory Anime.fromJson(Map<String, dynamic> json) {
-    var data = json['data'][0];
-
-    return Anime(
-      title: data['title'],
-      image: data['images']['jpg']['image_url'],
-      type: data['type'],
-      episodes: data['episodes'],
-      rank: data['rank'],
-      score: data['score'],
-    );
-  }
 }
