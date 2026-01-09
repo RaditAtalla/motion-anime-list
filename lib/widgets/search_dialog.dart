@@ -11,7 +11,7 @@ class SearchDialog extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: .start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text("Search", style: TextStyle(fontSize: 20)),
             SizedBox(height: 10),
