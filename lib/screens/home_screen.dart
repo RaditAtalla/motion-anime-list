@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:motion_anime_list/controllers/anime_controller.dart';
 import 'package:motion_anime_list/widgets/anime_card.dart';
 import 'package:motion_anime_list/widgets/search_dialog.dart';
