@@ -28,12 +28,12 @@ class Anime {
 
   factory Anime.fromData(Map<String, dynamic> data) {
     return Anime(
-      title: data['title'],
-      image: data['images']['jpg']['image_url'],
-      type: data['type'],
-      episodes: data['episodes'],
-      rank: data['rank'],
-      score: data['score'],
+      title: data['title'] ?? "Title not found",
+      image: data['images']['jpg']['image_url'] ?? "https://picsum.photos/200",
+      type: data['type'] ?? "Type not found",
+      episodes: data['episodes'] ?? 0,
+      rank: data['rank'] ?? 0,
+      score: data['score'] ?? 0,
     );
   }
 }
