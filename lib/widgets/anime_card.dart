@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hive/hive.dart';
 import 'package:motion_anime_list/controllers/anime_controller.dart';
 import 'package:motion_anime_list/models/anime_model.dart';
 
 class AnimeCard extends StatefulWidget {
   final Anime anime;
+  bool isFav;
 
-  const AnimeCard({super.key, required this.anime});
+  AnimeCard({super.key, required this.anime, required this.isFav});
 
   @override
   State<AnimeCard> createState() => _AnimeCardState();
@@ -15,49 +15,6 @@ class AnimeCard extends StatefulWidget {
 
 class _AnimeCardState extends State<AnimeCard> {
   final AnimeController animeC = Get.find<AnimeController>();
-  late bool isFav = false;
-
-  void setIsFavorite() {
-    var favoriteBox = Hive.box('fav-anime');
-    if (favoriteBox.containsKey(widget.anime.title)) {
-      setState(() {
-        isFav = true;
-      });
-    }
-  }
-
-  void addToFavorite() {
-    var favoriteBox = Hive.box('fav-anime');
-    favoriteBox.put(
-      widget.anime.title,
-      Anime(
-        title: widget.anime.title,
-        image: widget.anime.image,
-        type: widget.anime.type,
-        episodes: widget.anime.episodes,
-        rank: widget.anime.rank,
-        score: widget.anime.score,
-      ),
-    );
-
-    animeC.loadFavoriteAnimes();
-    animeC.loadAnimes();
-  }
-
-  void removeFromFavorite() {
-    var favoriteBox = Hive.box('fav-anime');
-    favoriteBox.delete(widget.anime.title);
-
-    animeC.loadFavoriteAnimes();
-    animeC.loadAnimes();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    setIsFavorite();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,13 +44,15 @@ class _AnimeCardState extends State<AnimeCard> {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    isFav ? removeFromFavorite() : addToFavorite();
+                    widget.isFav
+                        ? animeC.removeFromFavorite(widget.anime)
+                        : animeC.addToFavorite(widget.anime);
                     setState(() {
-                      isFav = !isFav;
+                      widget.isFav = !widget.isFav;
                     });
                   },
                   icon: Icon(
-                    isFav ? Icons.favorite : Icons.favorite_outline,
+                    widget.isFav ? Icons.favorite : Icons.favorite_outline,
                     color: Colors.white,
                   ),
                 ),

@@ -51,7 +51,7 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 if(animeC.animes.isNotEmpty) {
                   var anime = animeC.animes[index];
-                  return AnimeCard(anime: anime);
+                  return AnimeCard(anime: anime, isFav: animeC.getIsFav(anime),);
                 } else {
                   return Center(child: Text("Loading..."),);
                 }

@@ -23,6 +23,22 @@ class AnimeController extends GetxController {
     favoriteAnimes.assignAll(temp);
   }
 
+  void addToFavorite(Anime anime) {
+    favoriteBox.put(anime.title, anime);
+    loadFavoriteAnimes();
+    loadAnimes();
+  }
+
+  void removeFromFavorite(Anime anime) {
+    favoriteBox.delete(anime.title);
+    loadFavoriteAnimes();
+    loadAnimes();
+  }
+
+  bool getIsFav(Anime anime) {
+    return favoriteBox.containsKey(anime.title);
+  }
+
   @override
   void onInit() {
     super.onInit();
