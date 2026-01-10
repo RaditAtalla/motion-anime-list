@@ -50,13 +50,13 @@ class AnimeController extends GetxController {
   void addToFavorite(Anime anime) {
     favoriteBox.put(anime.title, anime);
     getFavoriteAnimes();
-    getAnime();
+    refresh();
   }
 
   void removeFromFavorite(Anime anime) {
     favoriteBox.delete(anime.title);
     getFavoriteAnimes();
-    getAnime();
+    refresh();
   }
 
   bool getIsFav(Anime anime) {
@@ -82,6 +82,12 @@ class AnimeController extends GetxController {
       animes.assignAll(animeList);
     } else {
       throw Exception("Failed searching anime");
+    }
+  }
+
+  void refresh() {
+    if(searchQuery.value.isEmpty) {
+      getAnime();
     }
   }
 
