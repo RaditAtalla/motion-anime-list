@@ -4,10 +4,12 @@ import 'package:motion_anime_list/controllers/anime_controller.dart';
 import 'package:motion_anime_list/widgets/anime_card.dart';
 
 class FavoriteScreen extends StatelessWidget {
-  final AnimeController animeC = Get.find<AnimeController>();
+  const FavoriteScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AnimeController animeC = Get.find<AnimeController>();
+
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -30,7 +32,7 @@ class FavoriteScreen extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 var anime = animeC.favoriteAnimes[index];
-                return AnimeCard(anime: anime, isFav: animeC.getIsFav(anime),);
+                return AnimeCard(anime: anime, isFav: animeC.getIsFav(anime));
               },
             );
           }),

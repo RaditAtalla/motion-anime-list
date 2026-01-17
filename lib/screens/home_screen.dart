@@ -5,10 +5,12 @@ import 'package:motion_anime_list/widgets/search_dialog.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatelessWidget {
-  final AnimeController animeC = Get.find<AnimeController>();
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final AnimeController animeC = Get.find<AnimeController>();
+
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
