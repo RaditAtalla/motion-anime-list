@@ -32,7 +32,7 @@ class FavoriteScreen extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 var anime = animeC.favoriteAnimes[index];
-                return AnimeCard(anime: anime, isFav: animeC.getIsFav(anime));
+                return AnimeCard(anime: anime);
               },
             );
           }),

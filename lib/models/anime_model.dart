@@ -16,6 +16,8 @@ class Anime {
   final int rank;
   @HiveField(5)
   final double score;
+  @HiveField(6)
+  bool isFavorite;
 
   Anime({
     required this.title,
@@ -24,6 +26,7 @@ class Anime {
     required this.episodes,
     required this.rank,
     required this.score,
+    this.isFavorite = false,
   });
 
   factory Anime.fromData(Map<String, dynamic> data) {

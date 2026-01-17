@@ -5,9 +5,8 @@ import 'package:motion_anime_list/models/anime_model.dart';
 
 class AnimeCard extends StatefulWidget {
   final Anime anime;
-  bool isFav;
 
-  AnimeCard({super.key, required this.anime, required this.isFav});
+  const AnimeCard({super.key, required this.anime});
 
   @override
   State<AnimeCard> createState() => _AnimeCardState();
@@ -44,15 +43,12 @@ class _AnimeCardState extends State<AnimeCard> {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    widget.isFav
+                    animeC.favoriteAnimes.contains(widget.anime)
                         ? animeC.removeFromFavorite(widget.anime)
                         : animeC.addToFavorite(widget.anime);
-                    setState(() {
-                      widget.isFav = !widget.isFav;
-                    });
                   },
                   icon: Icon(
-                    widget.isFav ? Icons.favorite : Icons.favorite_outline,
+                    animeC.favoriteAnimes.contains(widget.anime) ? Icons.favorite : Icons.favorite_outline,
                     color: Colors.white,
                   ),
                 ),

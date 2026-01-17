@@ -59,10 +59,6 @@ class AnimeController extends GetxController {
     animes.refresh();
   }
 
-  bool getIsFav(Anime anime) {
-    return favoriteBox.containsKey(anime.title);
-  }
-
   void search(String title) async {
     searchQuery.value = title;
 
